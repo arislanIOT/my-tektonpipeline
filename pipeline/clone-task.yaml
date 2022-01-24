@@ -1,0 +1,13 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task 
+metadata:
+  name: clonad
+  labels: 
+    tier: sample
+    data: pipeline1
+spec:
+
+  steps:
+    - name: cloning
+      type: git
+    

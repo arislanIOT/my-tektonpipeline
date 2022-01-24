@@ -1,0 +1,21 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task 
+metadata:
+  name: buildah
+  labels:
+    teir: sample
+    data: pipeline1
+  
+spec:
+  workspaces:
+    - name: source
+      
+
+  steps:
+    - name: building
+      image: registry.access.redhat.com/ubi8/ubi:latest
+      workingDir: $(workspaces.source.path)
+      script: |
+        pwd
+        yum update -y
+        buildah bud -f Dockerfile -t nodejs:latest

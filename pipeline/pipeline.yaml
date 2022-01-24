@@ -1,0 +1,33 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: nodejs-app
+  labels:
+    teir: sample
+    data: pipeline1
+spec:
+  workspaces:
+    name: sourcecode-storage
+  
+  tasks: 
+    
+    - name: repo-clone
+      taskRef:
+        name: git-clone
+      params:
+        - name: url 
+          value: "https://github.com/arislanIOT/get-started-node.git"
+      workspaces:            
+        - name: output
+          workspace: sourcecode-storage
+    
+    - name: build and push
+      taskRef: buildah
+      runAfter: 
+        - repo-clone
+      workspaces:
+        - name: source
+          workspace: sourcecode-storage
+
+     
+
