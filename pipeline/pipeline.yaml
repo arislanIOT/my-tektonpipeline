@@ -16,13 +16,14 @@ spec:
         name: git-clone
       params:
         - name: url 
-          value: "https://github.com/arislanIOT/get-started-node.git"
+          value: "https://github.com/arislanIOT/think-tekton-authoring.git"
       workspaces:            
         - name: output
           workspace: sourcecode-storage
     
     - name: build and push
-      taskRef: buildah
+      taskRef: 
+        name: buildah
       runAfter: 
         - repo-clone
       workspaces:
